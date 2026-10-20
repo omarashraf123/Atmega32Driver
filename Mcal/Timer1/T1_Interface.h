@@ -75,7 +75,8 @@ void T1_PWMInit();
 void T1_SetFreq(uint32_t Freq_Hz);
 
 void T1_SetTopVAlue();
-
+void T1_InterruptEnable();
+void T1_InterruptDisable();
 
 #endif //T1_FastPWM_ICR1
 

@@ -61,6 +61,16 @@
 
 #if T1_FastPWM_ICR1
 
+	#if T1_ICU_EdgeSelect==T1_ICU_Trigger_Falling
+		SetBit(TCCR1B_Reg,ICNC1);
+		ClearBit(TCCR1B_Reg,ICES1);
+	#endif
+
+	#if T1_ICU_EdgeSelect==T1_ICU_Trigger_Rising
+	SetBit(TCCR1B_Reg,ICES1);
+	SetBit(TCCR1B_Reg,ICNC1);
+	#endif
+
 void T1_PWMInit()
 {
 	// !!!  Pesodo code
@@ -70,11 +80,10 @@ void T1_PWMInit()
 	//! 4. TopValue
 	//! 5. Clock Select
 	TCCR1A_Reg= (TCCR1A_Reg&~T1_OCR1AModeMask)|(T1_FastPWMMode_ICR1&T1_OCR1BModeMask);
-	TCCR1B_Reg = (TCCR1B_Reg&~T1_OCR1BModeMask)|(T1_FastPWMMode_ICR1&T1_OCR1AModeMask);
+	TCCR1B_Reg = (TCCR1B_Reg&~T1_OCR1BModeMask)|(T1_FastPWMMode_ICR1&(T1_OCR1AModeMask<<1));
 	TCCR1B_Reg = (TCCR1B_Reg&~T1_PrescallerMask)|(T1_ClockSelect);
 #if  ChannelSelect == T1_CompareOutput_A
 
-	SetBit(TCCR1B_Reg,7);
 	// Set Action
 	TCCR1A_Reg = (TCCR1A_Reg&~T1_ActionMask)|(T1_PWMAction&T1_OCR1B_ActionMask);
 	//TCCR1B_Reg = (TCCR1B_Reg&~)
@@ -89,8 +98,8 @@ void T1_PWMInit()
 #endif //ChannelSelect == T1_TwoCompareOutput
 
 }
-	uint32_t TopValue   = Null;
-	uint32_t Freq_Value = Null;
+	uint32_t TopValue   = NULL;
+	uint32_t Freq_Value = NULL;
 void T1_SetFreq(uint32_t Freq_Hz)
 {
 	Freq_Value = Freq_Hz;
@@ -99,6 +108,36 @@ void T1_SetTopVAlue()
 {
 	TopValue = (CPU_Freq/(T1_ClockSelect*Freq_Value))-1;
 }
+void T1_InterruptEnable()
+{
+#if ChannelSelect == T1_CompareOutput_A
+	SetBit(TIMSK_Reg,OCIE1A);
+#endif
+
+#if ChannelSelect == T1_CompareOutput_B
+	SetBit(TIMSK_Reg,OCIE1B);
+#endif
+
+#if ChannelSelect == T1_TwoCompareOutput
+	SetBit(TIMSK_Reg,OCIE1A);
+	SetBit(TIMSK_Reg,OCIE1B);
+#endif
+}
+void T1_InterruptDisable()
+{
+#if ChannelSelect == T1_CompareOutput_A
+	ClearBit(TIMSK_Reg,OCIE1A);
+#endif
+
+#if ChannelSelect == T1_CompareOutput_B
+	ClearBit(TIMSK_Reg,OCIE1B);
+#endif
+
+#if ChannelSelect == T1_TwoCompareOutput
+	ClearBit(TIMSK_Reg,OCIE1B);
+#endif
+}
+
 void __vector_6(void) //   ICU (ISR)
 {
 	uint8_t Count =0 ;

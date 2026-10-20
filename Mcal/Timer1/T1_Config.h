@@ -78,11 +78,12 @@
 #endif //T1_CTCMode_ICR1
 
 #if T1_FastPWM_ICR1
+
 /*
  * T1_ICU_Trigger_Falling
  * T1_ICU_Trigger_Rising
  * */
-#define ICU_EdgeSelect
+#define T1_ICU_EdgeSelect  T1_ICU_Trigger_Falling
 
 
 /*
@@ -90,7 +91,7 @@
  * T1_CompareOutput_B
  * T1_TwoCompareOutput
  * */
-#define ChannelSelect  T1_CompareOutput_A
+#define ChannelSelect  T1_CompareOutput_B
 
 #if ChannelSelect == T1_CompareOutput_A
 /*
@@ -99,8 +100,8 @@
  *  * OC1A_NonInvetrting    // 1. Clear -> 2. Set
  *  * OC1A_Invetrting       // 1. Set -> 2. Clear
  * */
-	#define T1_ModeMask  T1_OCR1AModeMask
-	#define T1_ActionMask T1_OCR1A_ActionMask
+	#define T1_ModeMask    T1_OCR1AModeMask
+	#define T1_ActionMask  T1_OCR1A_ActionMask
 	#define T1_PWMAction   OC1A_NonInvetrting
 #endif // T1_CompareOutput_A
 
@@ -111,8 +112,8 @@
  *  * OC1B_NonInvetrting    // 1. Clear -> 2. Set
  *  * OC1B_Invetrting       // 1. Set -> 2. Clear
  * */
-	#define T1_ModeMask  T1_OCR1BModeMask
-	#define T1_ActionMask T1_OCR1B_ActionMask
+	#define T1_ModeMask    T1_OCR1BModeMask
+	#define T1_ActionMask  T1_OCR1B_ActionMask
 	#define T1_PWMAction   OC1B_NonInvetrting
 #endif // T1_CompareOutput_B
 
@@ -125,7 +126,7 @@
  *  * T1_OC1AInverting_OC1BNonInverting
  *  * T1_OC1ANonInverting_OC1BInverting
  * */
-	#define T1_ActionMask T1_TwoOCR_ActionMask
+	#define T1_ActionMask  T1_TwoOCR_ActionMask
 	#define T1_PWMAction   T1_CompareOutput_Inverting
 
 

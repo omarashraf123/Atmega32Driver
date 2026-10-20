@@ -36,6 +36,9 @@
 #define Led_Driver        	 Enable
 #define SevSeg_Driver  		 Enable
 #define Servo_Driver	  	 Enable
+#define UltraSonic_Driver	 Enable
+
+
 
 #if Timer0_Driver
 #define T0_Normal   Disable

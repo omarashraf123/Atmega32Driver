@@ -86,21 +86,21 @@ typedef enum
 
 typedef enum
 {
-	T1_NormalMode ,
-	T1_PWMPhaseCorrectMode_8Bit,
-	T1_PWMPhaseCorrectMode_9Bit,
-	T1_PWMPhaseCorrectMode_10Bit,
-	T1_CTCMode_OCR1A,              // The Top -> OCR1A
-	T1_FastPWMMode_8Bit,
-	T1_FastPWMMode_9Bit,
-	T1_FastPWMMode_10Bit,
-	T1_PWMFreqCorrectMode_ICR1,        // The Top -> Input Capture Reg
-	T1_PWMFreqCorrectMode_OCR1A,       // The Top -> OCR1A
-	T1_PWMPhaseCorrectMode_ICR1,       // The Top -> Input Capture Reg
-	T1_PWMPhaseCorrectMode_OCR1A,      // The Top -> OCR1A
-	T1_CTCMode_ICR1,		       // The Top -> Input Capture Reg
-	T1_FastPWMMode_ICR1 = 0x0E,	       // The Top -> Input Capture Reg
-	T1_FastPWMMode_OCR1A,		       // The Top -> OCR1A
+	T1_NormalMode =0x00,
+	T1_PWMPhaseCorrectMode_8Bit  =0x01,
+	T1_PWMPhaseCorrectMode_9Bit   =0x02,
+	T1_PWMPhaseCorrectMode_10Bit  =0x03,
+	T1_CTCMode_OCR1A  =0x08,              // The Top -> OCR1A
+	T1_FastPWMMode_8Bit =0x09,
+	T1_FastPWMMode_9Bit =0x0A,
+	T1_FastPWMMode_10Bit =0x0B,
+	T1_PWMFreqCorrectMode_ICR1 =0x10,        // The Top -> Input Capture Reg
+	T1_PWMFreqCorrectMode_OCR1A =0x11,       // The Top -> OCR1A
+	T1_PWMPhaseCorrectMode_ICR1 =0x12,       // The Top -> Input Capture Reg
+	T1_PWMPhaseCorrectMode_OCR1A =0x13,      // The Top -> OCR1A
+	T1_CTCMode_ICR1 =0x18,		       // The Top -> Input Capture Reg
+	T1_FastPWMMode_ICR1  = 0x1A,	       // The Top -> Input Capture Reg
+	T1_FastPWMMode_OCR1A =0x1B,		       // The Top -> OCR1A
 }T1_TimerMode_t;
 
 typedef enum
@@ -119,12 +119,12 @@ typedef enum
 
 typedef enum
 {
-	T1_OCR1AModeMask         =0x03,
-	T1_OCR1BModeMask         =0x18,
+	T1_OCR1AModeMask     =0x03,
+	T1_OCR1BModeMask     =0x18,
 	T1_OCR1A_ActionMask  = 0xC0,
 	T1_OCR1B_ActionMask  = 0x30,
 	T1_TwoOCR_ActionMask = 0xF0,
-	T1_PrescallerMask = 0x07,
+	T1_PrescallerMask    = 0x07,
 }T1_MaskValue_t;
 
 

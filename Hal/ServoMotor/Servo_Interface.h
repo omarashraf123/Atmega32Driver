@@ -19,5 +19,6 @@
 void Servo_Init();
 
 void Servo_SetAngle();
+
 #endif
 #endif /* HAL_SERVOMOTOR_SERVO_INTERFACE_H_ */
