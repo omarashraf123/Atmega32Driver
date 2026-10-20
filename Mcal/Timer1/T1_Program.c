@@ -59,6 +59,16 @@
 
 #endif //T1_CTCMode_ICR1
 
+
+void T1_PWMInit()
+{
+	// !!!  Pesodo code
+	//! 1. Set Mode 14
+	//! 2. Action (Inverting || Non-Inverting)
+	//! 3. Channel
+	//! 4. TopValue
+	//! 5. Clock Select
+
 #if T1_FastPWM_ICR1
 
 	#if T1_ICU_EdgeSelect==T1_ICU_Trigger_Falling
@@ -71,22 +81,15 @@
 	SetBit(TCCR1B_Reg,ICNC1);
 	#endif
 
-void T1_PWMInit()
-{
-	// !!!  Pesodo code
-	//! 1. Set Mode 14
-	//! 2. Action (Inverting || Non-Inverting)
-	//! 3. Channel
-	//! 4. TopValue
-	//! 5. Clock Select
+
 	TCCR1A_Reg= (TCCR1A_Reg&~T1_OCR1AModeMask)|(T1_FastPWMMode_ICR1&T1_OCR1BModeMask);
 	TCCR1B_Reg = (TCCR1B_Reg&~T1_OCR1BModeMask)|(T1_FastPWMMode_ICR1&(T1_OCR1AModeMask<<1));
 	TCCR1B_Reg = (TCCR1B_Reg&~T1_PrescallerMask)|(T1_ClockSelect);
 #if  ChannelSelect == T1_CompareOutput_A
 
 	// Set Action
+
 	TCCR1A_Reg = (TCCR1A_Reg&~T1_ActionMask)|(T1_PWMAction&T1_OCR1B_ActionMask);
-	//TCCR1B_Reg = (TCCR1B_Reg&~)
 	//Set top Value
 	T1_SetTopVAlue();
 #endif // ChannelSelect == T1_CompareOutput_A

@@ -126,7 +126,9 @@
  *  * T1_OC1AInverting_OC1BNonInverting
  *  * T1_OC1ANonInverting_OC1BInverting
  * */
+
 	#define T1_ActionMask  T1_TwoOCR_ActionMask
+
 	#define T1_PWMAction   T1_CompareOutput_Inverting
 
 
